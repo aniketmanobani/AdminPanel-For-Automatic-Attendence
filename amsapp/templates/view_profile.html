@@ -1,0 +1,68 @@
+{%extends 'wrapper.html'%}
+{% block title %} Admin Dashboard - View Profile{% endblock %}
+{%block page_heading%}Profile{% endblock %}
+{%block content %}
+
+
+<div class="card shadow mb-4">
+
+    <div class="card-body">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col-md-3">Profile</th>
+                            <th scope="col-md-9">Details</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">Username or Enrollment id</th>
+                            <th scope="row">{{profile.username}}</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">First Name</th>
+                            <th scope="row">{{profile.first_name}}</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Last name</th>
+                            <th scope="row">{{profile.last_name}}</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Email</th>
+                            <th scope="row">{{profile.email}}</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Branch</th>
+                            <th scope="row">{{profile.info.branch.name}}</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Role</th>
+                            <th scope="row">{{profile.info.user_role}}</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Phone Number</th>
+                            <th scope="row">{{profile.info.mobile}}</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Semester</th>
+                            <th scope="row">{{profile.info.sem_id.sem_in_roman}}</th>
+                        </tr>
+                        {% if user.info.user_role == 'admin' %}
+                        <tr>
+                            <th scope="row">Password</th>
+                            <th scope="row">{{profile.info.org_password}}</th>
+                        </tr>
+                        {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{%endblock%}

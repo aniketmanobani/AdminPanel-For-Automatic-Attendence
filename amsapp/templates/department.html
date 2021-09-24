@@ -1,0 +1,48 @@
+{%extends 'wrapper.html'%}
+{% block title %} Admin Dashboard - Departments{% endblock %}
+{%block page_heading%}Departments{% endblock %}
+{%block content %}
+
+
+<div class="card shadow mb-4">
+
+    <div class="card-body">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col-md-3">Departments Name</th>
+                            <th scope="col-md-9">Alias</th>
+                            {% if user.info.user_role == 'admin' %}
+                            <th scope="col-md-9">Action</th>
+                            {% endif %}
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for d in dept %}
+                        <tr>
+                            <th scope="row">{{d.name}}</th>
+                            <th scope="row">{{d.alias}}</th>
+                            {% if user.info.user_role == 'admin' %}
+                            <th scope="row"><a href="{% url 'edit_department' d.id %}">Edit</a></th>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <a href="{% url 'add_department' %}" class="btn btn-primary btn-icon-split">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-flag"></i>
+                    </span>
+                        <span class="text">Add An Department</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{%endblock%}

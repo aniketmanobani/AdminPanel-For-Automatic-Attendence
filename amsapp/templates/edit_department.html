@@ -1,0 +1,50 @@
+{%extends 'wrapper.html'%}
+{% block title %} Admin Dashboard - Edit Department{% endblock %}
+{%block page_heading%}Edit Department{% endblock %}
+{%block content %}
+
+
+<div class="card shadow mb-4">
+
+    <div class="card-body">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+
+                    <form action="{% url 'edit_department' dept.id %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Select Institute</label>
+                            <select name="inst_id" class="custom-select">
+                                {%for i in inst %}
+                                <option value="{{i.id}}">{{i.alias}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                           <div class="form-group">
+                            <label for="exampleInputPassword1">Enter Department Name
+                                <div class="alert-danger">{{errors.dept}}</div>
+                            </label>
+                            <input name="dept" type="text" value="{{dept.name}}" class="form-control" id="exampleInputPassword1"
+                                   placeholder="Department Name">
+                        </div>
+
+                        <input type="hidden" name="dept_id" value="{{dept.id}}"/>
+                        <input type="hidden" name="id" value="{{dept.id}}"/>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Enter Department Alias
+                                <div class="alert-danger">{{errors.alias}}</div>
+                            </label>
+                            <input name="alias" type="text" value="{{dept.alias}}" class="form-control" id="exampleInputPassword1"
+                                   placeholder="Alias">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{%endblock%}

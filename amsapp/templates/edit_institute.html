@@ -1,0 +1,35 @@
+{%extends 'wrapper.html'%}
+{% block title %} Admin Dashboard - Edit Institute{% endblock %}
+{%block page_heading%}Update Institute{% endblock %}
+{%block content %}
+
+
+<div class="card shadow mb-4">
+
+    <div class="card-body">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+
+                    <form action="{% url 'edit_institute' %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Enter Institute Name    <div class="alert-danger">{{errors.inst}}</div></label>
+                            <input name="inst" value="{{inst.name}}" type="text" class="form-control" id="exampleInputEmail1"
+                                   aria-describedby="emailHelp" placeholder="Enter Institute">
+                        </div>
+                        <input type="hidden" name="id" value="{{inst.id}}">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Enter Institute Alias  <div class="alert-danger">{{errors.alias}}</div></label>
+                            <input name="alias" value="{{inst.alias}}" type="text" class="form-control" id="exampleInputPassword1" placeholder="Alias">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{%endblock%}

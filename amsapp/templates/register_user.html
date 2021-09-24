@@ -1,0 +1,118 @@
+{%extends 'wrapper.html'%}
+{% block title %} Admin Dashboard - Register User{% endblock %}
+{%block page_heading%}Register Student{% endblock %}
+
+{%block content %}
+<div class="card shadow mb-4">
+
+    <div class="card-body">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-10 mx-auto">
+                    {% if flashError %}
+                    <div class="alert alert-danger" role="alert">
+                        {{flashError.username}}
+                    </div>
+                    {% endif %}
+                    <form action="{% url 'register' %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group row">
+                            <div class="col-sm-6">
+                                <label for="inputFirstname">First name
+                                    <div class="alert-danger">{{formerrors.firstname}}</div>
+                                </label>
+                                <input type="text" name="firstname" class="form-control" id="inputFirstname"
+                                       placeholder="First name">
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="inputLastname">Last name
+                                    <div class="alert-danger">{{formerrors.lastname}}</div>
+                                </label>
+                                <input type="text" name="lastname" class="form-control" id="inputLastname"
+                                       placeholder="Last name">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6">
+                                <label for="inputAddressLine1">User Role
+                                    <div class="alert-danger">{{formerrors.role}}</div>
+                                </label>
+                                <select class="custom-select" name="role">
+                                    <option selected>Select Role</option>
+                                    <option value="student">Student</option>
+                                    <option value="faculty">Faculty</option>
+                                    <option value="admin">Admin</option>
+
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+
+                                <label for="inputAddressLine2">Username as Enroll
+                                    <div class="alert-danger">{{formerrors.username}}</div>
+                                </label>
+                                <input type="text" name="username" class="form-control" id="inputAddressLine2"
+                                       placeholder="Username">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6">
+                                <label for="inputCity">Email
+                                    <div class="alert-danger">{{formerrors.email}}</div>
+                                </label>
+                                <input type="email" name="email" class="form-control" id="inputCity"
+                                       placeholder="Email Address">
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="inputState">Branch
+                                    <div class="alert-danger">{{formerrors.branch}}</div>
+                                </label>
+                                <select name="branch" class="custom-select">
+                                    {%for data in branch%}
+                                    <option value="{{data.id}}">{{data.name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6">
+                                <label for="inputContactNumber">Contact Number
+                                    <div class="alert-danger">{{formerrors.phone}}</div>
+                                </label>
+                                <input type="number" name="phone" class="form-control" id="inputContactNumber"
+                                       placeholder="Contact Number">
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="inputWebsite">Password
+                                    <div class="alert-danger">{{formerrors.password}}</div>
+                                </label>
+                                <input type="text" name="password" class="form-control" id="inputWebsite"
+                                       placeholder="Password">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6">
+                                <label for="inputFirstname">Display name
+                                    <div class="alert-danger">{{formerrors.disp}}</div>
+                                </label>
+                                <input type="text" name="disp" class="form-control" id="inputFirstname"
+                                       placeholder="Display name"/>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="inputState">Semester
+                                </label>
+                                <select name="sem" class="custom-select">
+                                    {%for data in sem%}
+                                    <option value="{{data.sem_in_number}}">{{data.sem_in_roman}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary px-4 float-right">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock %}

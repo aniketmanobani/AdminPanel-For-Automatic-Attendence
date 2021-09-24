@@ -1,0 +1,36 @@
+{%extends 'wrapper.html'%}
+{% block title %} Admin Dashboard - Your Attendence{% endblock %}
+{%block page_heading%} Attendence {% endblock %}
+{%block content %}
+
+
+<div class="card shadow mb-4">
+
+    <div class="card-body">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col-md-9">Attendence Details</th>
+                            <th scope="col-md-9">Presents</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for data in attendence %}
+                        <tr>
+                            <th scope="row">{{data.date_time}}</th>
+                            <th scope="row">(Present)</th>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{%endblock%}

@@ -1,0 +1,64 @@
+{%extends 'wrapper.html'%}
+{% block title %} Admin Dashboard - Users{% endblock %}
+{%block page_heading%}Users List{% endblock %}
+{%block content %}
+
+
+<div class="card shadow mb-4">
+
+    <div class="card-body">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-10 mx-auto">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Enroll</th>
+                            <th scope="col">First</th>
+                            <th scope="col">Last</th>
+                            <th scope="col">email</th>
+                            <th scope="col">Branch</th>
+                            <th scope="col">Semester</th>
+                            <th scope="col">Edit</th>
+                            <th scope="col">Disable</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for p in profiles%}
+                        <tr>
+
+                            <th scope="row"><a href="{%url 'user_view' id=p.id %}"> {{p.username}}</a></th>
+                            <td>{{p.first_name}}</td>
+                            <td>{{p.last_name}}</td>
+                            <td>{{p.email}}</td>
+                            <td>{{p.info.branch.name}}</td>
+                            <td>{{p.info.sem_id.sem_in_roman}}</td>
+                            <td><a href="{% url 'edit_profile' id=p.id %}">Edit</a></td>
+                            {% ifequal p.info.user_status one %}
+                            <td><a href="{% url 'disable_user' %}?action=0&username={{p.id}}">Active</a></td>
+                            {%endifequal%}
+
+                            {% ifequal p.info.user_status zero %}
+                            <td><a href="{% url 'disable_user' %}?action=1&username={{p.id}}">Disabled</a></td>
+                            {%endifequal%}
+
+                        </tr>
+                        {%endfor%}
+
+                        </tbody>
+                    </table>
+
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            {%for i in total_pages %}
+                            <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+                            {%endfor%}
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{%endblock%}
